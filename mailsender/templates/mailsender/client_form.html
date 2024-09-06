@@ -1,0 +1,33 @@
+{% extends 'mailsender/index.html' %}
+{% block content %}
+
+
+<div class="container">
+    <form class="row" method="post" enctype="multipart/form-data">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <button href="" type="submit"
+                                class="btn btn-sm btn-outline-secondary ms-2 mb-2">
+                            {% if object %}
+                            Save
+                            {% else %}
+                            Create
+                            {% endif %}
+                        </button>
+                        <a href="{% url 'mailsender:client'  %}" type="button"
+                           class="btn btn-sm btn-outline-secondary ms-1 mb-2">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+<div class="flex-shrink-0 p-3" style="width: 280px;">
+    <ul class="list-unstyled ps-0">
+
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="true">
+                Dashboard
+            </button>
+            <div class="collapse show" id="dashboard-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'mailsender:mailsender_list' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a>
+                    </li>
+                    <li><a href="{% url 'mailsender:client' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Clients</a>
+                    </li>
+                    <li><a href="{% url 'mailsender:mailinglist' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
+                        list</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#mailings-collapse" aria-expanded="True">
+                Mailings
+            </button>
+            <div class="collapse show" id="mailings-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'mailsender:mailinglist' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
+                        list</a></li>
+                    <li><a href="{% url 'mailsender:mailinglist_create' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                        mailing</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
+                        attempts</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#clients-collapse" aria-expanded="True">
+                Clients
+            </button>
+            <div class="collapse show" id="clients-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'mailsender:client' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Client list</a></li>
+                    <li><a href="{% url 'mailsender:client_create' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                        Client</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                Account
+            </button>
+            <div class="collapse show" id="account-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                        Account</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">View
+                        Profile</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Edit
+                        Profile</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#blog-collapse" aria-expanded="false">
+                Blog
+            </button>
+            <div class="collapse" id="blog-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">News</a></li>
+                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Write blog</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+    </ul>
+</div>

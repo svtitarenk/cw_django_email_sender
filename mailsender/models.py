@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from django.db import models
+from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
 NULLABLE = {'blank': True, 'null': True}
@@ -65,8 +68,18 @@ class Client(models.Model):
 
 
 class Message(models.Model):
-    subject = models.CharField(max_length=255)
+    subject = models.CharField(max_length=150)
+    image = models.ImageField(
+        upload_to='mailsender/photo',
+        **NULLABLE,
+        verbose_name='Изображение',
+        help_text='Загрузите изображение для сообщения'
+    )
     body = models.TextField()
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
 
     def __str__(self):
         return self.subject
@@ -112,8 +125,14 @@ class MailingList(models.Model):
         help_text='Введите название рассылки'
     )
     start_time = models.DateTimeField(
+        default=timezone.now,
         verbose_name='Дата и время первой отправки рассылки',
         help_text='Дата и время первой отправки рассылки'
+    )
+    end_time = models.DateTimeField(
+        **NULLABLE,
+        verbose_name='Дата и время окончания рассылки',
+        help_text='Дата и время окончания рассылки'
     )
     frequency = models.CharField(
         max_length=10,
@@ -141,7 +160,7 @@ class MailingList(models.Model):
     )
     """Связь OneToOne между MailingList и Message: Каждая рассылка должна быть связана 
     с одним конкретным сообщением, которое будет отправлено клиентам. """
-    message = models.OneToOneField(
+    message = models.ForeignKey(
         Message,
         related_name='mailing_lists',
         on_delete=models.CASCADE
