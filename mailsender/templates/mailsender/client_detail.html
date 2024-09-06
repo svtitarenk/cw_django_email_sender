@@ -1,0 +1,65 @@
+{% extends 'mailsender/index.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            <div class="col-4 sm-2" style="width: 24rem;">
+
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Настройка</th>
+                                <th scope="col">Значение</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th class="text-muted" scope="row">ФИО:</th>
+                                <td class="text-secondary">{{ object.full_name }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted" scope="row">Email:</th>
+                                <td class="text-secondary">{{ object.email }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted" scope="row">Телефон:</th>
+                                <td class="text-secondary">{{ object.phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted" scope="row">Город:</th>
+                                <td class="text-secondary">{{ object.city }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted" scope="row">Компания:</th>
+                                <td class="text-secondary">{{ object.company }}</td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted" scope="row">Активный:</th>
+                                <td class="text-secondary">{{ object.is_active }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'mailsender:client_update' object.pk %}" type="button"
+                               class="btn btn-sm btn-outline-secondary ms-2 mb-2">Edit</a>
+                            <a href="{% url 'mailsender:client_delete' object.pk %}"  type="button" class="btn btn-sm btn-outline-danger ms-1 mb-2">Delete</a>
+                            <a href="{% url 'mailsender:client'  %}" type="button"
+                               class="btn btn-sm btn-outline-secondary ms-1 mb-2">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
