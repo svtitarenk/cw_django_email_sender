@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from mailsender.forms import MailingListForm, ClientForm
-from mailsender.models import MailingList, Client
+from mailsender.models import MailingList, Client, MailingAttempt
 
 
 def index(request):
@@ -93,3 +93,7 @@ class ClientUpdateView(UpdateView):
 class ClientDeleteView(DeleteView):
     model = Client
     success_url = reverse_lazy('mailsender:client')
+
+
+class MailingAttemptListView(ListView):
+    model = MailingAttempt
