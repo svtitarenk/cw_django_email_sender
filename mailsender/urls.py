@@ -3,7 +3,7 @@ from django.urls import path
 from mailsender.apps import MailsenderConfig
 from mailsender.views import MailsenderListView, MailingListListView, ClientListListView, \
     ClientDetailView, MailingListDetailView, index, MailingListCreateView, MailingListUpdateView, MailingListDeleteView, \
-    ClientUpdateView, ClientDeleteView, ClientCreateView
+    ClientUpdateView, ClientDeleteView, ClientCreateView, MailingAttemptListView
 
 # создаем переменную с названием приложения
 app_name = MailsenderConfig.name
@@ -23,4 +23,6 @@ urlpatterns = [
     path('client/create/', ClientCreateView.as_view(), name='client_create'),
     path('client/<int:pk>/update/', ClientUpdateView.as_view(), name='client_update'),
     path('client/<int:pk>/delete/', ClientDeleteView.as_view(), name='client_delete'),
+
+    path('mailingattempt/', MailingAttemptListView.as_view(), name='mailingattempt'),
 ]

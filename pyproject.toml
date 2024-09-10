@@ -14,6 +14,8 @@ psycopg2-binary = "^2.9.9"
 phonenumbers = "^8.13.44"
 ipython = "^8.27.0"
 pillow = "^10.4.0"
+pytz = "^2024.1"
+django-apscheduler = "^0.6.2"
 
 
 [build-system]

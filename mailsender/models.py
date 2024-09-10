@@ -190,6 +190,12 @@ class MailingAttempt(models.Model):
         verbose_name='status'
     )
     response = models.TextField(**NULLABLE)
+    mailing = models.ForeignKey(
+        MailingList,
+        **NULLABLE,
+        related_name='mailing',
+        on_delete=models.CASCADE
+    )
     message = models.ForeignKey(
         Message,
         related_name='attempts',
@@ -206,4 +212,4 @@ class MailingAttempt(models.Model):
         verbose_name_plural = 'Попытки отправки сообщений'
 
     def __str__(self):
-        return f"Attempt for {self.client.email} at {self.attempt_time}"
+        return f"Attempt for {self.client.email} at {self.attempt_time} link to {self.mailing}"
