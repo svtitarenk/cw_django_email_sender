@@ -32,6 +32,11 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name='активный или нет',
+        help_text='Отметьте, активен клиент или нет'
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -39,6 +44,10 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
+
+        permissions = [
+            ("can_edit_is_active", "Can edit is_active"),  # описываем как будет называться в админке
+        ]
 
     def __str__(self):
         return f'{self.email}'

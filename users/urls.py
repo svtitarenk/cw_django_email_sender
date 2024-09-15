@@ -4,7 +4,7 @@ from django.urls import path, include
 
 from users import views
 from users.apps import UsersConfig
-from users.views import UserCreateView, email_verification
+from users.views import UserCreateView, email_verification, UserListView, UserDetailView
 
 app_name = UsersConfig.name
 
@@ -16,4 +16,6 @@ urlpatterns = [
     path('password-reset/', views.password_reset, name='password_reset'),
     path('password-reset/done/', views.password_reset_done, name='password_reset_done'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
+    path('user/', UserListView.as_view(), name='user'),
+    path('user/<int:pk>/', UserDetailView.as_view(), name='user_detail'),
 ]

@@ -6,20 +6,20 @@ from django_apscheduler.models import DjangoJob, DjangoJobExecution
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ("id", "email", "full_name", "phone_number", "city", "company", "is_active")
+    list_display = ("id", "email", "full_name", "phone_number", "city", "company", "is_active", "owner",)
     # list_filter = ("name", "email", "address")
     search_fields = ("email", "full_name", "is_active")
 
 
 @admin.register(MailingList)
 class MailingListAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "start_time", "frequency", "status",)
+    list_display = ("id", "name", "start_time", "frequency", "status", "owner",)
     list_filter = ("name", "start_time", "status",)
 
 
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ("id", "subject", "body")
+    list_display = ("id", "subject", "body", "owner",)
     list_filter = ("subject", "body",)
 
 

@@ -3,7 +3,8 @@ from django.urls import path
 from mailsender.apps import MailsenderConfig
 from mailsender.views import MailsenderListView, MailingListListView, ClientListListView, \
     ClientDetailView, MailingListDetailView, index, MailingListCreateView, MailingListUpdateView, MailingListDeleteView, \
-    ClientUpdateView, ClientDeleteView, ClientCreateView, MailingAttemptListView
+    ClientUpdateView, ClientDeleteView, ClientCreateView, MailingAttemptListView, MessageListView, MessageDetailView, \
+    MessageCreateView, MessageUpdateView, MessageDeleteView
 
 # создаем переменную с названием приложения
 app_name = MailsenderConfig.name
@@ -17,7 +18,6 @@ urlpatterns = [
     path('mailinglist/<int:pk>/update/', MailingListUpdateView.as_view(), name='mailinglist_update'),
     path('mailinglist/<int:pk>/delete/', MailingListDeleteView.as_view(), name='mailinglist_delete'),
 
-
     path('client/', ClientListListView.as_view(), name='client'),
     path('client/<int:pk>/', ClientDetailView.as_view(), name='client_detail'),
     path('client/create/', ClientCreateView.as_view(), name='client_create'),
@@ -25,4 +25,10 @@ urlpatterns = [
     path('client/<int:pk>/delete/', ClientDeleteView.as_view(), name='client_delete'),
 
     path('mailingattempt/', MailingAttemptListView.as_view(), name='mailingattempt'),
+
+    path('message/', MessageListView.as_view(), name='message'),
+    path('message/<int:pk>/', MessageDetailView.as_view(), name='message_detail'),
+    path('message/create/', MessageCreateView.as_view(), name='message_create'),
+    path('message/<int:pk>/update/', MessageUpdateView.as_view(), name='message_update'),
+    path('message/<int:pk>/delete/', MessageDeleteView.as_view(), name='message_delete'),
 ]

@@ -20,30 +20,26 @@
                                     <td class="text-secondary">{{ object.name }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-muted" scope="row">Время начала:</th>
-                                    <td class="text-secondary">{{ object.start_time }}</td>
+                                    <th class="text-muted" scope="row">Почта пользователя:</th>
+                                    <td class="text-secondary">{{ object.email }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-muted"  scope="row">Периодичность:</th>
-                                    <td class="text-secondary">{{ object.frequency }}</td>
+                                    <th class="text-muted"  scope="row">Телефон пользователя:</th>
+                                    <td class="text-secondary">{{ object.phone }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-muted" scope="row">Статус:</th>
-                                    <td class="text-secondary">{{ object.status }}</td>
+                                    <th class="text-muted" scope="row">Активный:</th>
+                                    <td class="text-secondary">{{ object.is_active }}</td>
                                 </tr>
                                 </tbody>
                             </table>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            {% if user.is_authenticated and user.is_staff %}
-                            <a href="{% url 'mailsender:mailinglist_update' object.pk  %}" type="button" class="btn btn-sm btn-outline-warning ms-2 mb-2">Edit</a>
-                            <a href="{% url 'mailsender:mailinglist' %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
-                            {% elif user.is_authenticated and object.owner == user %}
-                            <a href="{% url 'mailsender:mailinglist_update' object.pk  %}" type="button" class="btn btn-sm btn-outline-warning ms-2 mb-2">Edit</a>
-                            <a href="{% url 'mailsender:mailinglist_delete' object.pk %}" type="button" class="btn btn-sm btn-outline-danger ms-1 mb-2">Delete</a>
-                            <a href="{% url 'mailsender:mailinglist' %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
-                            {% endif %}
+
+                            <a href="{% url 'users:edit_profile' %}" type="button" class="btn btn-sm btn-outline-warning ms-2 mb-2">Edit</a>
+                            <a href="{% url 'users:user' %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
+
                         </div>
                     </div>
                 </div>

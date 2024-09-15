@@ -1,0 +1,50 @@
+{% extends 'mailsender/index.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            <div class="col-4 sm-2" style="width: 24rem;">
+                <div class="card shadow-sm">
+                    <div class="card-body" >
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Настройка</th>
+                                    <th scope="col">Значение</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th class="text-muted" scope="row">Тема письма:</th>
+                                    <td class="text-secondary">{{ object.subject }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-muted" scope="row">Текст письма:</th>
+                                    <td class="text-secondary">{{ object.body }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            {% if user.is_authenticated and user.is_staff %}
+                            <a href="{% url 'mailsender:message_update' object.pk  %}" type="button" class="btn btn-sm btn-outline-warning ms-2 mb-2">Edit</a>
+                            <a href="{% url 'mailsender:message' %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
+                            {% elif user.is_authenticated and object.owner == user %}
+                            <a href="{% url 'mailsender:message_update' object.pk  %}" type="button" class="btn btn-sm btn-outline-warning ms-2 mb-2">Edit</a>
+                            <a href="{% url 'mailsender:message_delete' object.pk %}" type="button" class="btn btn-sm btn-outline-danger ms-1 mb-2">Delete</a>
+                            <a href="{% url 'mailsender:message' %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
