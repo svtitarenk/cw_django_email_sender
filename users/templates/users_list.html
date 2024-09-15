@@ -1,0 +1,57 @@
+{% extends 'mailsender/index.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            {% if user.is_staff %}
+            {% for object in object_list %}
+
+            <div class="col-4 sm-2" style="width: 24rem;">
+
+                <div class="card shadow-sm">
+                    <div class="card-body" >
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Настройка</th>
+                                    <th scope="col">Значение</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th class="text-muted" scope="row">Почта пользователя:</th>
+                                    <td class="text-secondary">{{ object.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-muted" scope="row">Телефон пользователя:</th>
+                                    <td class="text-secondary">{{ object.phone }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-muted"  scope="row">Страна:</th>
+                                    <td class="text-secondary">{{ object.country }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-muted" scope="row">Активный:</th>
+                                    <td class="text-secondary">{{ object.is_active }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'users:user_detail' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary  ms-2 mb-2 ">View</a>
+                            <a href="{% url 'users:edit_profile'  %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2">Edit</a>
+                            <a href="{% url 'users:user'  %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

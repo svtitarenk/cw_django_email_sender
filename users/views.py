@@ -4,11 +4,13 @@ import string
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.crypto import get_random_string
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView, DetailView, UpdateView
 
 from config.settings import EMAIL_HOST_USER
 from users.forms import UserRegisterForm, UserProfileForm
@@ -114,3 +116,22 @@ def edit_profile(request):
         form = UserProfileForm(instance=request.user)
 
     return render(request, 'edit_profile.html', {'form': form})
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    login_url = '/users/login/'
+    template_name = 'users_list.html'
+
+    def get_queryset(self):
+        users_list = super().get_queryset()
+        if self.request.user.is_staff:
+            return users_list
+        else:
+            return PermissionDenied
+
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    login_url = '/users/login/'
+    template_name = 'user_detail.html'

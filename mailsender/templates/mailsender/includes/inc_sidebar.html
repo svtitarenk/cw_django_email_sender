@@ -45,6 +45,23 @@
         <li class="border-top my-3"></li>
         <li class="mb-1">
             <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+                    data-bs-toggle="collapse" data-bs-target="#mailings-collapse" aria-expanded="True">
+                Messages
+            </button>
+            <div class="collapse show" id="mailings-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'mailsender:message' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Message
+                        list</a></li>
+                    <li><a href="{% url 'mailsender:message_create' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                        message</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="border-top my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
                     data-bs-toggle="collapse" data-bs-target="#clients-collapse" aria-expanded="True">
                 Clients
             </button>
@@ -66,12 +83,16 @@
             </button>
             <div class="collapse show" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    {% if user.is_staff %}
+                    <li><a href="{% url 'users:user' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users list</a>
+                    </li>
+                    {% endif %}
                     {% if user.is_authenticated %}
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">View
+                    <li><a href="{% url 'users:edit_profile' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Edit
                         Profile</a></li>
-                    <li><a href="{% url 'users:edit_profile' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Edit
-                        Profile</a></li>
-                    <li><a href="{% url 'users:logout' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign Out</a>
+                    <li><a href="{% url 'users:logout' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign Out</a>
                     </li>
                     {% else %}
                     <li><a href="{% url 'users:register' %}"

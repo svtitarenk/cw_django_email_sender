@@ -16,4 +16,13 @@ class UserProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'phone', 'avatar',)
+        fields = ('email', 'phone', 'avatar', 'is_active',)
+
+
+class UserProfileModeratorForm(UserChangeForm):
+    password = None  # исключаем поле пароля из формы
+
+    class Meta:
+        model = User
+        fields = ('is_active',)
+

@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
+from users.models import User
+
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -58,6 +60,13 @@ class Client(models.Model):
         verbose_name='активный или нет',
         help_text='Отметьте, активен клиент или нет'
     )
+    owner = models.ForeignKey(
+        User,
+        verbose_name="Владелец",
+        help_text="Укажите владельца рассылки",
+        **NULLABLE,
+        on_delete=models.SET_NULL
+    )
 
     class Meta:
         verbose_name = 'Клиент'
@@ -76,6 +85,13 @@ class Message(models.Model):
         help_text='Загрузите изображение для сообщения'
     )
     body = models.TextField()
+    owner = models.ForeignKey(
+        User,
+        verbose_name="Владелец",
+        help_text="Укажите владельца рассылки",
+        **NULLABLE,
+        on_delete=models.SET_NULL
+    )
 
     class Meta:
         verbose_name = 'Сообщение'
@@ -146,12 +162,13 @@ class MailingList(models.Model):
         verbose_name='Статус рассылки',
         help_text='Выберите статус рассылки'
     )
-    # creator = models.ForeignKey(
-    #     'auth.User',
-    #     on_delete=models.CASCADE,
-    #     verbose_name='Создатель рассылки',
-    #     help_text='Создатель рассылки'
-    # )
+    owner = models.ForeignKey(
+        User,
+        verbose_name="Владелец",
+        help_text="Укажите владельца рассылки",
+        **NULLABLE,
+        on_delete=models.SET_NULL
+    )
     """ Связь ManyToMany между MailingList и Client: Эта связь позволяет связать множество клиентов 
     с одной рассылкой для управления списками рассылок и их получателями."""
     clients = models.ManyToManyField(
@@ -169,6 +186,10 @@ class MailingList(models.Model):
     class Meta:
         verbose_name = 'Рассылка'
         verbose_name_plural = 'Рассылки'
+
+        permissions = [
+            ("can_edit_status", "Can edit Status"),  # описываем как будет называться в админке
+        ]
 
     def __str__(self):
         return f'{self.name}: dt: {self.start_time}, freq: {self.frequency}, status: {self.status}'
