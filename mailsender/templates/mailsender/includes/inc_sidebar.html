@@ -8,11 +8,14 @@
             </button>
             <div class="collapse show" id="dashboard-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{% url 'mailsender:mailsender_list' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a>
+                    <li><a href="{% url 'mailsender:mailsender_list' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a>
                     </li>
-                    <li><a href="{% url 'mailsender:client' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Clients</a>
+                    <li><a href="{% url 'mailsender:client' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Clients</a>
                     </li>
-                    <li><a href="{% url 'mailsender:mailinglist' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
+                    <li><a href="{% url 'mailsender:mailinglist' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
                         list</a></li>
                     <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a>
                     </li>
@@ -27,11 +30,14 @@
             </button>
             <div class="collapse show" id="mailings-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{% url 'mailsender:mailinglist' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
+                    <li><a href="{% url 'mailsender:mailinglist' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
                         list</a></li>
-                    <li><a href="{% url 'mailsender:mailinglist_create' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                    <li><a href="{% url 'mailsender:mailinglist_create' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
                         mailing</a></li>
-                    <li><a href="{% url 'mailsender:mailingattempt'  %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
+                    <li><a href="{% url 'mailsender:mailingattempt'  %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Mailing
                         attempts</a></li>
                 </ul>
             </div>
@@ -44,8 +50,10 @@
             </button>
             <div class="collapse show" id="clients-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="{% url 'mailsender:client' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Client list</a></li>
-                    <li><a href="{% url 'mailsender:client_create' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                    <li><a href="{% url 'mailsender:client' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Client list</a></li>
+                    <li><a href="{% url 'mailsender:client_create' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
                         Client</a></li>
                 </ul>
             </div>
@@ -58,14 +66,23 @@
             </button>
             <div class="collapse show" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
-                        Account</a></li>
+                    {% if user.is_authenticated %}
                     <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">View
                         Profile</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Edit
+                    <li><a href="{% url 'users:edit_profile' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Edit
                         Profile</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign Out</a>
+                    <li><a href="{% url 'users:logout' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign Out</a>
                     </li>
+                    {% else %}
+                    <li><a href="{% url 'users:register' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Create
+                        Account</a></li>
+                    <li><a href="{% url 'users:login' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign in</a></li>
+                    <li><a href="{% url 'users:password_reset' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Recovery password</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </li>

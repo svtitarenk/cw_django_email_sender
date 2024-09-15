@@ -75,6 +75,7 @@ class ClientListListView(ListView):
 class ClientCreateView(CreateView):
     model = Client
     form_class = ClientForm
+    success_url = reverse_lazy('mailsender:client')
 
 
 class ClientDetailView(DetailView):
