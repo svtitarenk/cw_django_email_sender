@@ -1,0 +1,31 @@
+{% extends 'mailsender/index.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            <div class="col-4 sm-2" style="width: 24rem;">
+                <div class="card shadow-sm">
+                    <div class="card-header py-3 text-center">
+                        <h3 class="card-title pricing-card-title">{{ object.title }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <img src="{% add_path object.preview %}" class="img-fluid" style="max-height: 400px" alt="">
+                        <p>{{ object.body }}</p>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a href="{% url 'blog:blog_list' %}" type="button"
+                               class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

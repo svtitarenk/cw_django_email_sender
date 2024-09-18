@@ -1,0 +1,35 @@
+{% extends 'mailsender/index.html' %}
+{% load tags %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 g-3">
+            {% for object in object_list %}
+            <div class="col-4 sm-2" style="width: 24rem;">
+                <div class="col-md-4 form-control">
+                    <div class="card rounded-3 shadow-sm mb-2">
+                        <div class="card-header py-3">
+                            <h6 class="card-title pricing-card-title">{{ object.title }}</h6>
+                        </div>
+                        <div class="card-body">
+                            <img src="{% add_path object.preview %}" class="img-fluid" style="max-height: 400px" alt="">
+                            <p>{{ object.body | slice:100 }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="bnt-group">
+                                <a href="{% url 'blog:blog_detail' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">View</a>
+                                <a href="{% url 'mailsender:mailinglist' %}" type="button" class="btn btn-sm btn-outline-secondary ms-1 mb-2 ">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

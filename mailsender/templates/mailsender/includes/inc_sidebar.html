@@ -84,7 +84,8 @@
             <div class="collapse show" id="account-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     {% if user.is_staff %}
-                    <li><a href="{% url 'users:user' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users list</a>
+                    <li><a href="{% url 'users:user' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">Users list</a>
                     </li>
                     {% endif %}
                     {% if user.is_authenticated %}
@@ -115,9 +116,9 @@
             </button>
             <div class="collapse" id="blog-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">News</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Write blog</a>
-                    </li>
+                    <li><a href="{% url 'blog:blog_list' %}"
+                           class="link-body-emphasis d-inline-flex text-decoration-none rounded">News</a></li>
+
                 </ul>
             </div>
         </li>

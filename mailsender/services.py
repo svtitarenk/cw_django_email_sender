@@ -3,7 +3,10 @@ from datetime import datetime, timedelta
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
+from django.core.cache import cache
 from django.core.mail import send_mail
+
+from config.settings import CACHE_ENABLED
 from mailsender.models import MailingList, MailingAttempt
 from django.utils import timezone
 
@@ -111,3 +114,21 @@ def send_mailing():
                         response=str(e),
                         attempt_time=timezone.now()  # Сохраняем текущее время отправки
                     )
+
+
+def get_mailings_from_cache():
+    # если кэш не включен, обращаемся к БД
+    if not CACHE_ENABLED:
+        return MailingList.objects.all()
+    # если кэш включен, получаем данные из кэша
+    key = 'mailinglist_list'
+    # обращаемся к django для получения кэша
+    mailings = cache.get(key)
+    # если мы получили объекты, возвращаем объекты
+    if mailings is not None:
+        return mailings
+    mailings = MailingList.objects.all()
+    # если объекты мы не получили из кэша, мы их должны туда положить
+    # redis-cli -> SET key "Hello" / GET key ->  "Hello"
+    cache.set(key, mailings)
+    return mailings
