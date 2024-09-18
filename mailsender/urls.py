@@ -1,4 +1,6 @@
 from django.urls import path
+from django.views.decorators.cache import cache_page
+
 # импортируем название приложения
 from mailsender.apps import MailsenderConfig
 from mailsender.views import MailsenderListView, MailingListListView, ClientListListView, \
@@ -12,7 +14,7 @@ app_name = MailsenderConfig.name
 # urls mailsender
 urlpatterns = [
     path('', index, name='mailsender_list'),
-    path('mailinglist/', MailingListListView.as_view(), name='mailinglist'),
+    path('mailinglist/', cache_page(60)(MailingListListView.as_view()), name='mailinglist'),
     path('mailinglist/<int:pk>/', MailingListDetailView.as_view(), name='mailinglist_detail'),
     path('mailinglist/create/', MailingListCreateView.as_view(), name='mailinglist_create'),
     path('mailinglist/<int:pk>/update/', MailingListUpdateView.as_view(), name='mailinglist_update'),

@@ -7,6 +7,7 @@ from django.views.generic import CreateView, ListView, DetailView, UpdateView, D
 
 from mailsender.forms import MailingListForm, ClientForm, MailingListModeratorForm, MessageForm
 from mailsender.models import MailingList, Client, MailingAttempt, Message
+from mailsender.services import get_mailings_from_cache
 
 
 def index(request):
@@ -28,6 +29,10 @@ class MailsenderListView(LoginRequiredMixin, ListView):
     model = MailingList
     template_name = 'mailsender/index.html'
     login_url = '/users/login/'
+
+    def get_queryset(self):
+        # возвращаем все объекты, которые прошли в кэш или БД (если кэша нет) (mailsender.services)
+        return get_mailings_from_cache()
 
 
 class MailingListListView(LoginRequiredMixin, ListView):
